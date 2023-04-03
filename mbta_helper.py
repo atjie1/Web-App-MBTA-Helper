@@ -1,14 +1,8 @@
-# Your API KEYS (you need to use your own keys - very long random characters)
+
+import urllib.request
+import json
+from pprint import pprint
 from config import MAPBOX_TOKEN, MBTA_API_KEY
-
-
-# Useful URLs (you need to add the appropriate parameters for your requests)
-MAPBOX_BASE_URL = "https://api.mapbox.com/geocoding/v5/mapbox.places"
-MBTA_BASE_URL = "https://api-v3.mbta.com/stops"
-
-
-# A little bit of scaffolding if you want to use it
-
 
 def get_json(url: str) -> dict:
     """
@@ -16,7 +10,11 @@ def get_json(url: str) -> dict:
 
     Both get_lat_long() and get_nearest_station() might need to use this function.
     """
-    pass
+    with urllib.request.urlopen(url) as f:
+        response_text = f.read().decode('utf-8')
+        response_data = json.loads(response_text)
+        # pprint(response_data)
+        return response_data
 
 
 def get_lat_long(place_name: str) -> tuple[str, str]:
@@ -25,16 +23,34 @@ def get_lat_long(place_name: str) -> tuple[str, str]:
 
     See https://docs.mapbox.com/api/search/geocoding/ for Mapbox Geocoding API URL formatting requirements.
     """
-    pass
+    place_name = place_name.replace(" ","+")    
+    MAPBOX_BASE_URL = "https://api.mapbox.com/geocoding/v5/mapbox.places"
+    url = f'{MAPBOX_BASE_URL}/{place_name}.json?access_token={MAPBOX_TOKEN}'
+    response_data = get_json(url)
+    # pprint(response_data)
+    [longitude, latitude] = response_data['features'][0]['center'] #coordinates are longitude latitude
+    return tuple([latitude, longitude])
 
 
-def get_nearest_station(latitude: str, longitude: str) -> tuple[str, bool]:
+def get_nearest_station(latitude: str, longitude: str, sortby='distance', radius='0.01') -> tuple[str, bool]:
     """
     Given latitude and longitude strings, return a (station_name, wheelchair_accessible) tuple for the nearest MBTA station to the given coordinates.
 
     See https://api-v3.mbta.com/docs/swagger/index.html#/Stop/ApiWeb_StopController_index for URL formatting requirements for the 'GET /stops' API.
     """
-    pass
+    MBTA_BASE_URL = "https://api-v3.mbta.com/stops"
+    MBTA_url = f'{MBTA_BASE_URL}?api_key={MBTA_API_KEY}&sort={sortby}&filter%5Blatitude%5D={latitude}&filter%5Blongitude%5D={longitude}&radius%5D={radius}'
+    # pprint(get_json(MBTA_url)) #: list
+    data = get_json(MBTA_url)['data'][0] #dict
+    # pprint(data)
+    station = data['attributes']['name']
+    # print(station)
+    wheelchair_access = data['attributes']['wheelchair_boarding']
+    if wheelchair_access == 1:
+        wheelchair_access = "Yes"
+    else:
+        wheelchair_access = "No"
+    return station, wheelchair_access
 
 
 def find_stop_near(place_name: str) -> tuple[str, bool]:
@@ -43,15 +59,46 @@ def find_stop_near(place_name: str) -> tuple[str, bool]:
 
     This function might use all the functions above.
     """
-    pass
-
+    lat, long = get_lat_long(place_name)
+    return get_nearest_station(lat, long)
+    
 
 def main():
     """
-    You can test all the functions here
+    Testing of all the functions here.
+    """ 
+    MAPBOX_BASE_URL = "https://api.mapbox.com/geocoding/v5/mapbox.places"
+    query = "Babson+College"
+    url = f'{MAPBOX_BASE_URL}/{query}.json?access_token={MAPBOX_TOKEN}'
+    # url='https://api.mapbox.com/geocoding/v5/mapbox.places/Boston.json?access_token=pk.eyJ1IjoiYWJieXRqaWUiLCJhIjoiY2xnMDB1cGg3MTJwNTNlbWsyM2N5Zjc1ZyJ9.MuR9ei396i_ZGyZ43G6GvQ'
+
     """
-    pass
+    Hardcode: Kept getting "bad request" error, but then requested a new mapbox token without limit to url, attempted hard code
+    "Babson%College" 400 Error: Bad Request - the request could not be satisfied
+    When running, always gives "SyntaxError: invalid syntax" - but if you run and debug says "no bugs" and gives the output / pylance reload required
+    """
+
+    """
+    Get Latitude and Longitude Tuples
+    """
+    Home = get_lat_long('Congress Street Boston')
+    print(Home)
+    # print(type(Home)) #tuple
+    # coordinates: (42.35188, -71.04957)
+    
+    Gables_lat = 42.34845515783725
+    Gables_long = -71.04221613687264
+    print(get_nearest_station(Gables_lat, Gables_long))
+
+    NS_latitude, NS_longitude = get_lat_long('Newbury Street')
+    station = get_nearest_station(NS_latitude, NS_longitude)
+    print(station)
+
+    print(find_stop_near('Newbury Street'))
 
 
+
+
+    
 if __name__ == '__main__':
     main()
