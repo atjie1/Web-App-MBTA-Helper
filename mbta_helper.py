@@ -46,10 +46,11 @@ def get_nearest_station(latitude: str, longitude: str, sortby='distance', radius
     station = data['attributes']['name']
     # print(station)
     wheelchair_access = data['attributes']['wheelchair_boarding']
-    if wheelchair_access == 1:
-        wheelchair_access = "Yes"
-    else:
-        wheelchair_access = "No"
+    # if wheelchair_access == 1:
+    #     wheelchair_access = "Yes"
+    # else:
+    #     wheelchair_access = "No"
+    wheelchair_access = "Yes" if wheelchair_access == 1 else "No"
     return station, wheelchair_access
 
 
@@ -59,8 +60,9 @@ def find_stop_near(place_name: str) -> tuple[str, bool]:
 
     This function might use all the functions above.
     """
+    place_name = place_name.replace(" ","+")
     lat, long = get_lat_long(place_name)
-    return get_nearest_station(lat, long)
+    return get_nearest_station(str(lat), str(long))
     
 
 def main():

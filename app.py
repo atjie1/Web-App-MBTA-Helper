@@ -5,17 +5,21 @@ from mbta_helper import find_stop_near
 app = Flask(__name__)
 
 
-@app.route('/MBTA_Helper')
+@app.route("/")
+def index():
+    return render_template("index.html")
 
-@app.get('/MBTA_Helper')
-def get_MBTA():
-    return render_template('index.html')
+@app.get("/station") #METHOD NOT ALLOWED #Attribute error
+def get_station():
+    return render_template("station-form.html")
 
-@app.post('/MBTA_stop')
-def MBTA_Helper():
+@app.post('/station')
+def stop_post():
     place_name = request.form.get('location')
-    stop = find_stop_near(place_name)
-    return render_template('index.html', location=place_name, stop=stop)
+    place_name = str(place_name)
+    stop, wheelchair = find_stop_near(place_name)
+    return render_template('station-result.html', stop=stop, wheelchair=wheelchair)
+    
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True, port=3640)
