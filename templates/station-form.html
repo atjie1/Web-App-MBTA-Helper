@@ -5,16 +5,36 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MBTA Stop</title>
-    <style></style>
+    <title>MBTA-Helper</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <form action="" method="post">
-        <label for=""> Location:<input type="text"name="Location"></label>
-        <button>Find Nearest Stop</button>
-    </form>
-    <p></p>
+    <div class="wrapper">
+        <div class="content">
+            <h1>MBTA-Helper</h1>
+            <form action="" method="post">
+                <label for="location">Current Location:</label>
+                <input autocomplete="yes" autofocus name="location" placeholder="Current Location" type="text" />
+                {% for action in courses %}
+                <label>
+                    <input name="action" type="radio" value="{{ action }}" /> {{ action }}
+                </label>
+                {% endfor %}
+                <div>
+                    <input type="submit" value="Find Nearest MBTA-Stop" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class=""footer">
+        <div class="container">
+            <div class="col-md-12">
+                <p>Designed and Developed by Abby Tjie</p>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
