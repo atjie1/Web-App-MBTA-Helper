@@ -41,9 +41,11 @@ If I was given more time, I feel like I would be able to implement the "Hey, Jud
 1. I was able to play lofi music by downloading a free MP3 track, converting it to a .wav file and using pygame to play it when my webapp is running!
 2. ChatGPT was able to help me with HTML style, which I really think looks great!
 
-![image]:\Users\atjie1\Downloads\Web-App-MBTA-Helper\images\Final Form - MBTA-app.PNG
+My finished Flask webapp!
 
-![image]:C:\Users\atjie1\Downloads\Web-App-MBTA-Helper\images\Final Form - MBTA-app.PNG
+<img width="300" alt="Final Form - MBTA-app" src="https://user-images.githubusercontent.com/122930813/230264443-bdabdf43-f343-4528-b312-e2b3db60984c.PNG">
+
+<img width="300" alt="Result - MBTA-app" src="https://user-images.githubusercontent.com/122930813/230264464-ded85e97-8569-4d3c-bfd4-4420f09ed938.PNG">
 
 ***Learnings***
 I was able to learn about Flask and its ability to develop a webpage to present and apply an API. Moving foward, I will be using APIs in my final OIM project and potentially Flask. ChatGPT was a big help in assisting in formatting style in HTML, a topic that is not covered or practiced in this specific course. Before I had started this project, I wish I knew how to manipulate the style of a webpage (Web Tech would have been helpful!).
