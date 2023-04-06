@@ -6,8 +6,82 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MBTA-Helper</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        .content {
+            padding-bottom: 80px;
+        }
+
+        /* Style for the body */
+        body,
+        html {
+            background-color: #f2f2f2;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+        }
+
+        /* Style for the h1 tag */
+        h1,
+        html {
+            text-align: center;
+            color: #333;
+        }
+
+        /* Style for the form */
+        form,
+        html {
+            max-width: 400px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for the label tag */
+        label,
+        html {
+            display: block;
+            margin-bottom: 50px;
+            font-size: 16px;
+        }
+
+        /* Style for the input tag */
+        input[type="text"] {
+            width: 95%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="radio"] {
+            width: 95%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        /* Style for the submit button */
+        input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Hover style for the submit button */
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+
+        /* https://www.youtube.com/watch?v=xKZNlDq6NlE */
+    </style>
 </head>
 
 <body>
@@ -15,20 +89,20 @@
         <div class="content">
             <h1>MBTA-Helper</h1>
             <form action="" method="post">
-                <label for="location">Current Location:</label>
-                <input autocomplete="yes" autofocus name="location" placeholder="Current Location" type="text" />
-                {% for action in courses %}
+                <label for="location">Here to Help!</label>
+                <input autocomplete="yes" autofocus name="location" placeholder="Current Location" type="text"
+                    required />
                 <label>
-                    <input name="action" type="radio" value="{{ action }}" /> {{ action }}
+                    <input name="action" type="checkbox" required/>I am confirming this location is in
+                    Boston, MA.
                 </label>
-                {% endfor %}
                 <div>
-                    <input type="submit" value="Find Nearest MBTA-Stop" />
+                    <input type="submit" value="Find Nearest Stop" />
                 </div>
             </form>
         </div>
     </div>
-    <div class=""footer">
+    <div>
         <div class="container">
             <div class="col-md-12">
                 <p>Designed and Developed by Abby Tjie</p>
