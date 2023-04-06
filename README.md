@@ -48,4 +48,5 @@ My finished Flask webapp!
 <img width="300" alt="Result - MBTA-app" src="https://user-images.githubusercontent.com/122930813/230264464-ded85e97-8569-4d3c-bfd4-4420f09ed938.PNG">
 
 ***Learnings***
+
 I was able to learn about Flask and its ability to develop a webpage to present and apply an API. Moving foward, I will be using APIs in my final OIM project and potentially Flask. ChatGPT was a big help in assisting in formatting style in HTML, a topic that is not covered or practiced in this specific course. Before I had started this project, I wish I knew how to manipulate the style of a webpage (Web Tech would have been helpful!).
