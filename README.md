@@ -5,7 +5,7 @@ Web App Designed and Developed by Abby Tjie
    
    MBTA-Helper is a simple webapp created using Flask that prompts the user to enter a location within the Boston area as a text input. When the form is submitted, the output uses the Mapbox API and MBTA API to return the nearest MBTA train stop and whether the stop is wheelchair accessible. Additional features include a link to see the location of the MBTA train stop in Google Maps and even open Google Maps through the display. Background lofi music plays using the pygame python module while the webapp is running.
 
-**Reflection** (~3 paragraphs + screenshots)
+**Reflection**
 
 ***The Process + Obstacles***
 
